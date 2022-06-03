@@ -8,3 +8,8 @@ function rgbToHex(r, g, b) {
 }
 
 export default rgbToHex;
+
+
+
+//rgb to hext converter
+//https://www.rgbtohex.net/
