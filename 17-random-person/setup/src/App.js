@@ -12,11 +12,47 @@ const defaultImage = "https://randomuser.me/api/portraits/men/75.jpg";
 function App() {
   const [loading, setLoading] = useState(true);
   const [person, setPerson] = useState(null);
-  const [title, setTitle] = useState("name");
   const [value, setValue] = useState("random person");
+  const [title, setTitle] = useState("name");
 
+  const getPerson=async()=>{
+    const response=await fetch(url);
+    const data = await response.json();
+    const person = data.results[0]
+    const{phone,email}=person;
+    const {large:image}=person.picture;
+    const {login :{password},}=person;
+    const {first,last}=person.name;
+    const {dob :{age},}=person;
+    const {street:{number,name}}=person.location;
+
+    const newPerson={
+      image,
+      phone,
+      email,
+      password,
+      age,
+      street:`${number} ${name}`,
+      name:`${first} ${last}`,
+    }
+    setPerson(newPerson);
+    setLoading(false);
+    setTitle('name');
+    setValue(newPerson.name)
+  }
+
+  useEffect(()=>{
+    getPerson();
+  },[])
   const handleValue = (e) => {
-    console.log(e.target);
+   // console.log(e.target);
+   if(e.target.classList.contains('icon')){
+     const newValue=e.target.dataset.label;
+     console.log(newValue);
+     setTitle(newValue)
+     setValue(person[newValue]);
+   }
+
   };
   return (
     <main className="">
@@ -63,7 +99,7 @@ function App() {
             > <FaLock/></button>
            
           </div>
-           <button className="btn" type="button">
+           <button className="btn" type="button" onClick={getPerson}>
                 {loading ? 'loading...': 'Random User'}
             </button>
         </div>
