@@ -1,5 +1,5 @@
 const paginate = (followers) => {
-    const itemsPerPage=10;//on one page how many items 
+    const itemsPerPage=4;//on one page how many items 
     const pages=Math.ceil(followers.length / itemsPerPage);//calculate how many pages will create
     //console.log(pages);
     //Array.from(length of array, data with map like function)
