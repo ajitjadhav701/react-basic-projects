@@ -1,6 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react'
-// make sure to use https
+
 export const API_ENDPOINT = `https://www.omdbapi.com/?apikey=${process.env.REACT_APP_MOVIE_API_KEY}`
+//REACT_APP_MOVIE_API_KEY this key is private so i have define it in .env file , which will be later ignored by git (ajitmjindia701)
+console.log(API_ENDPOINT)
 const AppContext = React.createContext()
 
 const AppProvider = ({ children }) => {
