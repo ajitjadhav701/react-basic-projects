@@ -24,12 +24,20 @@ function App() {
   }
   //console.log(questions[0]);
   //console.log(index)
-  const { question, incorrect_answers, correct_answer,isModalOpen } = questions[index];
-  const answers = [...incorrect_answers, correct_answer];
+  const { question, incorrect_answers, correct_answer, isModalOpen } =
+    questions[index];
+ // const answers = [...incorrect_answers, correct_answer];
+ let answers=[...incorrect_answers]
+ const tempIndex=Math.floor( Math.random()*4);
+ if(tempIndex===3){
+  answers.push(correct_answer)
+ }else{
+  answers.push(answers[tempIndex])
+  answers[tempIndex]=correct_answer  
+ }
   return (
     <main className="">
-   
-   <Modal />  
+      <Modal />
       <section className="quiz">
         <p className="correct-answers">
           correct answers: {correct}/{index + 1}
@@ -42,7 +50,7 @@ function App() {
                 <button
                   key={index}
                   className="answer-btn"
-                  onClick={()=>checkAnswer(correct_answer===ans)}
+                  onClick={() => checkAnswer(correct_answer === ans)}
                   dangerouslySetInnerHTML={{ __html: ans }}
                 />
               );
